@@ -1,5 +1,5 @@
-package Scooter.Data;
-import Scooter.Object.Order;
+package Scooter.data;
+import Scooter.object.Order;
 public class OrderData {
     public static Order getDefault(String[] color) {
         return new Order("Anastasia",

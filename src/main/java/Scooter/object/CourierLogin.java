@@ -1,4 +1,4 @@
-package Scooter.Object;
+package Scooter.object;
 
 public class CourierLogin {
     private String login;

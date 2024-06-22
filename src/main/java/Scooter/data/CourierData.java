@@ -1,7 +1,9 @@
-package Scooter.Data;
-import Scooter.Object.Courier;
+package Scooter.data;
+import Scooter.object.Courier;
+
+
 public class CourierData {
-    public static Courier getDefault() {
+       public static Courier getDefault() {
         return new Courier("av.mart", "123456", "Anastasia");
     }
 

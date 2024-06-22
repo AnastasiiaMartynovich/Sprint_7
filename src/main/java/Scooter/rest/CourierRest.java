@@ -1,9 +1,9 @@
-package Scooter.Rest;
+package Scooter.rest;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import Scooter.Object.Courier;
-import Scooter.Object.CourierLogin;
+import Scooter.object.Courier;
+import Scooter.object.CourierLogin;
 
 import static io.restassured.RestAssured.given;
 

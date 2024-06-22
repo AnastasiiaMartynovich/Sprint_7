@@ -5,10 +5,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import Scooter.Rest.OrderRest;
-import Scooter.Object.Order;
-import Scooter.Data.OrderData;
+import Scooter.rest.OrderRest;
+import Scooter.object.Order;
+import Scooter.data.OrderData;
 
+import static org.apache.http.HttpStatus.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -50,8 +51,8 @@ public class CreateOrderTests {
 
         orderTrack = response.extract().path("track");
 
-        //провреяем статус код
-        assertEquals("Некорректный статус код", 201, statusCode);
+        //проверяем статус код
+        assertEquals("Некорректный статус код", SC_CREATED, statusCode);
         //проверяем, что track заказа не равен нулю
         assertNotNull("Значение track пустое", orderTrack);
     }

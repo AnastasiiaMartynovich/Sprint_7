@@ -1,8 +1,8 @@
-package Scooter.Rest;
+package Scooter.rest;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import Scooter.Object.Order;
+import Scooter.object.Order;
 
 import static io.restassured.RestAssured.given;
 public class OrderRest extends RestUrl{
