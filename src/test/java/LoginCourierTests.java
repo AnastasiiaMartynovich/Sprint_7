@@ -23,47 +23,47 @@ public class LoginCourierTests {
     }
 
     @Test
-    @DisplayName("Курьер может авторизоваться")
-    @Description("Запрос возвращает id и статус код 200")
+    @DisplayName("РљСѓСЂСЊРµСЂ РјРѕР¶РµС‚ Р°РІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ")
+    @Description("Р—Р°РїСЂРѕСЃ РІРѕР·РІСЂР°С‰Р°РµС‚ id Рё СЃС‚Р°С‚СѓСЃ РєРѕРґ 200")
     public void courierCanLogin() {
-        //логинимся под зарегистрированным курьером
+        //Р»РѕРіРёРЅРёРјСЃСЏ РїРѕРґ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Рј РєСѓСЂСЊРµСЂРѕРј
         ValidatableResponse loginResponse = courierRest
                 .loginCourier(CourierLogin.from(CourierData.getRegisteredCourier()));
 
-        //записываем id курьера
+        //Р·Р°РїРёСЃС‹РІР°РµРј id РєСѓСЂСЊРµСЂР°
         courierId = loginResponse.extract().path("id");
-        //проверяем, что id что не равен нулю
+        //РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ id С‡С‚Рѕ РЅРµ СЂР°РІРµРЅ РЅСѓР»СЋ
         assertNotNull("Id is null", courierId);
     }
 
     @Test
-    @DisplayName("Заполнены не все обязательные поля при авторизации")
-    @Description("Запрос возвращает ошибку 400")
+    @DisplayName("Р—Р°РїРѕР»РЅРµРЅС‹ РЅРµ РІСЃРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ РїСЂРё Р°РІС‚РѕСЂРёР·Р°С†РёРё")
+    @Description("Р—Р°РїСЂРѕСЃ РІРѕР·РІСЂР°С‰Р°РµС‚ РѕС€РёР±РєСѓ 400")
     public void loginCourierEmptyPassword() {
-        //логинимся без пароля
+        //Р»РѕРіРёРЅРёРјСЃСЏ Р±РµР· РїР°СЂРѕР»СЏ
         ValidatableResponse loginResponse = courierRest
                 .loginCourier(CourierLogin.from(CourierData.getDefaultWithoutPassword()));
 
         int loginStatusCode = loginResponse.extract().statusCode();
         String message = loginResponse.extract().path("message");
 
-        //проверка ответа на запрос
-        assertEquals("Некорректный статус код", SC_BAD_REQUEST, loginStatusCode);
-        assertEquals("Недостаточно данных для входа", message);
+        //РїСЂРѕРІРµСЂРєР° РѕС‚РІРµС‚Р° РЅР° Р·Р°РїСЂРѕСЃ
+        assertEquals("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ СЃС‚Р°С‚СѓСЃ РєРѕРґ", SC_BAD_REQUEST, loginStatusCode);
+        assertEquals("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РґР°РЅРЅС‹С… РґР»СЏ РІС…РѕРґР°", message);
     }
 
     @Test
-    @DisplayName("Авторизация под несуществующим пользователем")
-    @Description("Запрос возвращает ошибку 404")
+    @DisplayName("РђРІС‚РѕСЂРёР·Р°С†РёСЏ РїРѕРґ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј")
+    @Description("Р—Р°РїСЂРѕСЃ РІРѕР·РІСЂР°С‰Р°РµС‚ РѕС€РёР±РєСѓ 404")
     public void wrongLoginCourier() {
-        //логинимся под несуществующим пользователем
+        //Р»РѕРіРёРЅРёРјСЃСЏ РїРѕРґ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
         ValidatableResponse loginResponse = courierRest
                 .loginCourier(CourierLogin.from(CourierData.getWrong()));
         int loginStatusCode = loginResponse.extract().statusCode();
 
         String message = loginResponse.extract().path("message");
-        //проверка ответа на запрос
-        assertEquals("Некорректный статус код", SC_NOT_FOUND, loginStatusCode);
-        assertEquals("Учетная запись не найдена", message);
+        //РїСЂРѕРІРµСЂРєР° РѕС‚РІРµС‚Р° РЅР° Р·Р°РїСЂРѕСЃ
+        assertEquals("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ СЃС‚Р°С‚СѓСЃ РєРѕРґ", SC_NOT_FOUND, loginStatusCode);
+        assertEquals("РЈС‡РµС‚РЅР°СЏ Р·Р°РїРёСЃСЊ РЅРµ РЅР°Р№РґРµРЅР°", message);
     }
 }
